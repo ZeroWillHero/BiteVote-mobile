@@ -6,7 +6,7 @@ class SuccessSnackBar {
     Get.snackbar(
       'Success',
       message,
-      snackPosition: SnackPosition.BOTTOM,
+      snackPosition: SnackPosition.TOP,
       backgroundColor: Colors.green,
       colorText: Colors.white,
       borderRadius: 10,

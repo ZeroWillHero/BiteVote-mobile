@@ -13,12 +13,11 @@ class RatingController extends GetxController {
   Future<void> rateFood(
       double foodRating, String foodId, String message, String userId) async {
     try {
+      isLoading.value = true;
       // fetching to the food Review
       print("Add food Rate...!");
       final response = await http.post(Uri.parse("$baseUrl$foodpath"),
-          headers: {
-            'Content-Type': 'application/json'
-          },
+          headers: {'Content-Type': 'application/json'},
           body: jsonEncode({
             "rating": foodRating,
             "foodId": foodId,
@@ -29,22 +28,25 @@ class RatingController extends GetxController {
       if (response.statusCode == 201) {
         SuccessSnackBar.show("food Rate added Successfully");
       } else {
-        FailedSnackBar.show("Failed to add food Rate");
+        final responseBody = jsonDecode(response.body);
+        FailedSnackBar.show(responseBody['message']);
       }
+      isLoading.value = false;
     } catch (e) {
       print("Error: $e");
       FailedSnackBar.show("An error occurred while adding food Rate");
+      isLoading.value = false;
     }
   }
 
   Future<void> rateShop(
       double shopRating, String shopId, String message, String userId) async {
     try {
+      isLoading.value = true;
+
       // fetching to the shop Review
       final response = await http.post(Uri.parse("$baseUrl$shoppath"),
-          headers: {
-            'Content-Type': 'application/json'
-          },
+          headers: {'Content-Type': 'application/json'},
           body: jsonEncode({
             "rating": shopRating,
             "shopId": shopId,
@@ -55,11 +57,14 @@ class RatingController extends GetxController {
       if (response.statusCode == 201) {
         SuccessSnackBar.show("Shop Rate added Successfully");
       } else {
-        FailedSnackBar.show("Failed to add Shop Rate");
+        final responseBody = jsonDecode(response.body);
+        FailedSnackBar.show(responseBody['message']);
       }
+      isLoading.value = false;
     } catch (e) {
       print("Error: $e");
       FailedSnackBar.show("An error occurred while adding Shop Rate");
+      isLoading.value = false;
     }
   }
 }

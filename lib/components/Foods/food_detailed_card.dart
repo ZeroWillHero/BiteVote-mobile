@@ -1,6 +1,7 @@
 import 'package:bitevote/components/Foods/rating_fields.dart';
 import 'package:bitevote/components/gradient_btn.dart';
 import 'package:bitevote/controllers/auth_controller.dart';
+import 'package:bitevote/controllers/customize_item_controller.dart';
 import 'package:bitevote/controllers/filter_btn_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -15,6 +16,8 @@ class FoodDetailedCard extends StatelessWidget {
       Get.put(FilterBtnController());
 
   final AuthController _authController = Get.put(AuthController());
+  final CustomizeItemController _customizeItemController =
+      Get.put(CustomizeItemController());
 
   @override
   Widget build(BuildContext context) {
@@ -122,7 +125,7 @@ class FoodDetailedCard extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(20.0),
               child: Text(
-                "Customize your meal",
+                "Rate your meal",
                 style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
@@ -133,16 +136,19 @@ class FoodDetailedCard extends StatelessWidget {
               foodId: filterBtnController.filteredFoods[index].id,
               userId: _authController.user.value!.id,
               shopId: filterBtnController.filteredFoods[index].shopId,
-              
             ),
 
             Padding(
-              padding: const EdgeInsets.all(10.0),
+              padding: const EdgeInsets.fromLTRB(0, 10, 0, 40),
               child: Center(
                 child: GradientBtn(
-                    text: "Add your order",
+                    text: "Checkout",
                     onPressed: () {
-                      print("Order added");
+                      Get.toNamed("/checkout", arguments: {
+                        "food": filterBtnController.filteredFoods[index],
+                        "customizations":
+                            _customizeItemController.customizeItems
+                      });
                     }),
               ),
             )

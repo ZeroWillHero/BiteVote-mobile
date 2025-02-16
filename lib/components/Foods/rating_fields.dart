@@ -159,11 +159,14 @@ class _RatingFieldsState extends State<RatingFields> {
                   padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
                 ),
                 onPressed: () async {
-                  await ratingController.rateFood(
-                      foodRating,
-                      widget.foodId,
-                      messageController.text,
-                      widget.userId);
+                  print("button pressed ");
+                  print(
+                      "btn action : ${widget.foodId}, ${widget.userId}, ${widget.shopId}");
+                  await ratingController.rateFood(foodRating, widget.foodId,
+                      messageController.text, widget.userId);
+
+                  await ratingController.rateShop(shopRating, widget.shopId,
+                      messageController.text, widget.userId);
                 },
                 child: Obx(
                   () => ratingController.isLoading.value
@@ -172,7 +175,7 @@ class _RatingFieldsState extends State<RatingFields> {
                               AlwaysStoppedAnimation<Color>(Colors.white),
                         )
                       : Text(
-                          "Add your order",
+                          "Add Rating",
                           style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
