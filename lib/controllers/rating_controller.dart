@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'package:bitevote/components/snackBars/failed.dart';
 import 'package:bitevote/components/snackBars/success.dart';
 import 'package:get/get.dart';
@@ -18,12 +19,12 @@ class RatingController extends GetxController {
           headers: {
             'Content-Type': 'application/json'
           },
-          body: {
+          body: jsonEncode({
             "rating": foodRating,
             "foodId": foodId,
             "message": message,
             "userId": userId
-          });
+          }));
 
       if (response.statusCode == 201) {
         SuccessSnackBar.show("food Rate added Successfully");
@@ -32,6 +33,7 @@ class RatingController extends GetxController {
       }
     } catch (e) {
       print("Error: $e");
+      FailedSnackBar.show("An error occurred while adding food Rate");
     }
   }
 
@@ -43,12 +45,12 @@ class RatingController extends GetxController {
           headers: {
             'Content-Type': 'application/json'
           },
-          body: {
+          body: jsonEncode({
             "rating": shopRating,
             "shopId": shopId,
             "message": message,
             "userId": userId
-          });
+          }));
 
       if (response.statusCode == 201) {
         SuccessSnackBar.show("Shop Rate added Successfully");
@@ -57,8 +59,7 @@ class RatingController extends GetxController {
       }
     } catch (e) {
       print("Error: $e");
+      FailedSnackBar.show("An error occurred while adding Shop Rate");
     }
   }
-
-  
 }

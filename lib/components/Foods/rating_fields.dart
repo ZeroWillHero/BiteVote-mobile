@@ -163,8 +163,7 @@ class _RatingFieldsState extends State<RatingFields> {
                       foodRating,
                       widget.foodId,
                       messageController.text,
-                      widget
-                          .userId); // add the submit rating function here .....
+                      widget.userId);
                 },
                 child: Obx(
                   () => ratingController.isLoading.value
