@@ -23,7 +23,13 @@ class AuthController extends GetxController {
       user.value = UserModel.fromJson(response);
       // print(user.value!.token);
       // print("email user " + user.value!.email.toString());
-      user.value = UserModel.fromJson(response);
+      // user.value = UserModel.fromJson(response);
+      print("Response: $response");
+
+      user.value!.token = response['token'];
+      user.value!.id = response['user']['_id'];
+
+      
       setIsLoading(false);
       SuccessSnackBar.show('Login Successful');
       Get.toNamed('/home');
@@ -39,7 +45,10 @@ class AuthController extends GetxController {
       setIsLoading(true);
       final response = await _authService.register(
           firstname, lastname, email, password, nic, phone, address);
-      user.value = UserModel.fromJson(response);
+
+      print("Response: $response");
+      // user.value = UserModel.fromJson(response);
+      // user.value =
       setIsLoading(false);
       SuccessSnackBar.show('Registration Successful');
       Get.toNamed('/login');

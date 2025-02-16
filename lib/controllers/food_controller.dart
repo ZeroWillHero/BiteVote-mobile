@@ -18,8 +18,6 @@ class FoodController extends GetxController {
     selectedItem.value = index;
   }
 
-  
-
   final String url = "https://bite-vote-backend.vercel.app/api/foods/get";
 
   Future<void> getFoods() async {

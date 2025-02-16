@@ -6,7 +6,7 @@ class FailedSnackBar {
     Get.snackbar(
       'Failed',
       message,
-      snackPosition: SnackPosition.BOTTOM,
+      snackPosition: SnackPosition.TOP,
       backgroundColor: Colors.red,
       colorText: Colors.white,
       borderRadius: 10,

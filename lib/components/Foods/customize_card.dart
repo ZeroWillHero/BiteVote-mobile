@@ -1,3 +1,4 @@
+import 'package:bitevote/controllers/customize_item_controller.dart';
 import 'package:bitevote/controllers/filter_btn_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -10,12 +11,23 @@ class CustomizeCard extends StatelessWidget {
   });
 
   final FilterBtnController filterBtnController;
+  final CustomizeItemController customizeItemController =
+      Get.put(CustomizeItemController());
   final int index;
 
-  var value = false.obs;
+  final value = false.obs;
+  final customizeItem = [].obs;
 
   void _handleCheckboxChanged(bool? newValue, int index) {
     value.value = newValue!;
+    if (value.value) {
+      customizeItemController.addItem({
+        "name": filterBtnController.filteredFoods[index].customizations[0].name,
+        "price": filterBtnController.filteredFoods[index].customizations[0].price,
+      });
+    } else {
+      customizeItemController.removeItem(index);
+    }
   }
 
   @override
