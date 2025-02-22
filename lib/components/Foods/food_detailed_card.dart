@@ -19,6 +19,12 @@ class FoodDetailedCard extends StatelessWidget {
   final CustomizeItemController _customizeItemController =
       Get.put(CustomizeItemController());
 
+  // initialize Customization Controller
+  final CustomizeItemController customizeItemController =
+      Get.put(CustomizeItemController());
+
+  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

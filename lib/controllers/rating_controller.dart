@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:bitevote/components/snackBars/failed.dart';
 import 'package:bitevote/components/snackBars/success.dart';
+import 'package:bitevote/controllers/customize_item_controller.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
@@ -9,6 +10,15 @@ class RatingController extends GetxController {
   String shoppath = "shopReviews/create";
   String baseUrl = "https://bite-vote-backend.vercel.app/api/";
   var isLoading = false.obs;
+
+  final CustomizeItemController customizeItemController =
+      Get.put(CustomizeItemController());
+
+  @override
+  void onInit() {
+    customizeItemController.clearItems();
+    super.onInit();
+  }
 
   Future<void> rateFood(
       double foodRating, String foodId, String message, String userId) async {
